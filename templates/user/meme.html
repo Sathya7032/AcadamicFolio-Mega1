@@ -1,0 +1,40 @@
+{% extends "base.html" %} {% load static %} {% block body %}
+<section>
+  <div class="container">
+    <form method="GET" action="/meme/">
+      <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="Search Posts">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
+        </span>
+    </div><!-- /input-group -->
+    <div class="br"></div>
+    </form><br/><br/>
+   
+
+    {% if results %}
+    
+      <div class="row">
+        
+        {% for meme in results %}
+        <div class="col-md-6" style="padding: 2px">
+          <div class="card" >
+            <img
+              src="/media/{{ meme.images }}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <p class="card-text">{{ meme.description }}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>No results found.</p>
+      {% endif %}
+
+  </div>
+</section>
+{% endblock body %}

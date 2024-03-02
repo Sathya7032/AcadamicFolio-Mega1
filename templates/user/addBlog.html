@@ -1,0 +1,48 @@
+{% load static %} 
+{% load django_bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% bootstrap_messages %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <!-- Include Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container" style="width: 70%;border: 2px solid red;border-radius: 10px;margin-top: 50px;">
+      <h1 class="text-center bg-primary text-white">Add Blogs to your Account</h1>
+      <hr />
+      <form action="/upload_blog/" method="post" class="form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.media}}
+        {% bootstrap_form form %}
+      <center>
+
+      
+        {% bootstrap_button button_type="submit" content="Add Blog" %}
+        {% bootstrap_button button_type="reset" content="Reset" %}
+      </center>
+      </form>
+      <p>
+        Already have an account?
+        <a href="#">Log in</a>
+      </p>
+    </div>
+  </body>
+</html>

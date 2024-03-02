@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/tutorials.css' %}">
+{% endblock styles %}
+{% block body %}
+
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+  <div class="banner_inner d-flex align-items-center">
+    <div
+      class="overlay bg-parallax"
+      data-stellar-ratio="0.9"
+      data-stellar-vertical-offset="0"
+      data-background=""
+    ></div>
+    <div class="container">
+      <div class="banner_content text-center">
+        <h2>Tutorials</h2>
+        <div class="page_link">
+          <a href="/homepage/">Dashboard</a>
+          <a href="/tutorials/">Tutorials</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Home Banner Area =================-->
+
+  <section>
+    <h1 style="background-color: whitesmoke;margin: 0;" class="text-center">Tutorials</h1>
+    <div class="projcard-container">
+     {% for tutorials in tutorials %}
+       
+     
+        <div class="projcard projcard-blue">
+          <div class="projcard-innerbox">
+            <img class="projcard-img" src="/media/{{tutorials.tutorialImage}}" />
+            <div class="projcard-textbox">
+              <div class="projcard-title">{{tutorials.tutorialName}}</div>
+              <div class="projcard-subtitle">This tutorial is about {{tutorials.tutorialName}}</div>
+              <div class="projcard-bar"></div>
+              <div class="projcard-description">{{tutorials.tutorialContent}}</div>
+              <div class="projcard-tagbox">
+                <span class="projcard-tag"><a href="/tutorials/{{tutorials.id}}">view</a></span>
+                <a href="/tutorials/{{tutorials.id}}/">view</a>
+                <span class="projcard-tag">CSS</span>
+              </div>
+            </div>
+          </div>
+        </div> 
+        
+        <center>
+            <a class="main_btn" href="/tutorials/{{tutorials.id}}">Explore Tutorial</a>
+        </center>
+
+        {% endfor %}
+      </div>
+  </section>
+{% endblock body %}

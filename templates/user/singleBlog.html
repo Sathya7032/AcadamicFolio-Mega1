@@ -1,0 +1,98 @@
+{% extends "base.html" %} 
+{% block body %}
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+  <div class="banner_inner d-flex align-items-center">
+    <div
+      class="overlay bg-parallax"
+      data-stellar-ratio="0.9"
+      data-stellar-vertical-offset="0"
+      data-background=""
+    ></div>
+    <div class="container">
+      <div class="banner_content text-center">
+        <h2>Blog Details</h2>
+        <div class="page_link">
+          <a href="/homepage/">Home</a>
+          <a href="/blogs/">Blogs</a>
+          <a href="">Blog Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Home Banner Area =================-->
+
+<section class="blog_area single-post-area p_120">
+  <div class="container">
+    <h4 class="text-danger" style="font-weight: bolder">
+      Auther:- {{blog.user.username}}
+    </h4>
+    <p>{{blog.date}}</p>
+    <h1 class="text-center">{{blog.title}}</h1>
+    <p>{{blog.content|safe}}</p>
+  </div>
+</section>
+
+<h2 class="text-center">Comments</h2>
+
+<div class="row d-flex justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-0 border" style="background-color: #f0f2f5">
+      <div class="card-body p-4">
+        {% for comment in blog.comments.all %}
+
+        <div class="card mb-4">
+          <div class="card-body">
+            <p>{{ comment.content }}</p>
+
+            <div class="d-flex justify-content-between">
+              <div class="d-flex flex-row align-items-center">
+                <p class="small mb-0 ms-2">
+                  Comment by: {{ comment.user.username }} at {{ comment.date }}
+                </p>
+              </div>
+              <div class="d-flex flex-row align-items-center">
+                <p class="small text-muted mb-0">Upvote?</p>
+                <i
+                  class="far fa-thumbs-up mx-2 fa-xs text-black"
+                  style="margin-top: -0.16rem"
+                ></i>
+                <p class="small text-muted mb-0">3</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <p>No comments yet.</p>
+
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="comment-form">
+  <h4>Leave a Comment</h4>
+  <form action="/blog_detail/{{blog.id}}/" method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+      <textarea
+        class="form-control mb-10"
+        rows="20"
+        name="content"
+        placeholder="Messege"
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'Messege'"
+        required=""
+      ></textarea>
+    </div>
+    <button type="submit" class="primary-btn submit_btn">Post Comment</button>
+  </form>
+</div>
+
+{% endblock body %}

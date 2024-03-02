@@ -1,0 +1,86 @@
+{% extends "base.html" %} 
+{% block body %}
+<section style="background-color: whitesmoke;">
+    <div><br/><br/><br/></div>
+  <div class="todo-container" >
+    <div class="container" >
+      <div class="row justify-content-center" style="margin-top: 30px;">
+        <div class="col-md-10">
+          <div class="card" style="background-color: inherit">
+            <h1
+              variant="h3"
+              color="primary"
+              style="
+                font-weight: bold;
+                text-align: center;
+                border: none;
+                padding: 15px;
+              "
+            >
+              Todo List
+            </h1>
+            <div class="card-body">
+              <form id="todo-form" action="/add/" method="post">{% csrf_token %}
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="title"
+                    id="todo-input"
+                    placeholder="Add new task"
+                    required
+                  />
+                  <button class="btn btn-primary" type="submit">
+                    Add task
+                  </button>
+                </div>
+              </form>
+
+              {% for task in tasks %}
+              <div class="col col-12 p-2 todo-item">
+                <div class="input-group">
+                  {% if task.completed %}
+                  <p class="form-control">
+                    <strike>{{task.title}}</strike>
+                  </p>
+                  {% endif %} {% if not task.completed %}
+                  <p class="form-control">{{task.title}}</p>
+                  {% endif %}
+                  <div class="input-group-append">
+                    <button
+                      class="btn btn-success text-white ml-2"
+                      type="button"
+                      id="button-addon2 "
+                    >
+                      <a
+                        href="/complete/{{task.id}}/"
+                        style="text-decoration: none"
+                        >Complete</a
+                      >
+                    </button>
+                    <button
+                      class="btn bg-danger text-white me-2 ms-2 ml-2"
+                      type="button"
+                      id="button-addon2 "
+                      href="/delete/{{task.id}}/"
+                    >
+                      <i class="fas fa-trash">
+                        <a href="/delete/{{task.id}}/">Delete</a>
+                      </i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <br/>
+</section>
+
+{% endblock body %}
