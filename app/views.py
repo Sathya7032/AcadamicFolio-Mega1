@@ -7,6 +7,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.contrib.auth.forms import AuthenticationForm
 from django.conf import settings
+import sweetify
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -28,7 +29,7 @@ def register_view(request):
 			msg.attach_alternative(html_content, "text/html")
 			msg.send()
 			##################################################################
-			messages.success(request, f'Your account has been created ! You are now able to log in')
+			sweetify.success(request, 'Success!', text='Registration was successful.', persistent='Dismiss')
 			return redirect('login')
 	else:
 		form = UserRegisterForm()

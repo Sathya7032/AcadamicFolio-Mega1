@@ -42,8 +42,11 @@ INSTALLED_APPS = [
     'crispy_forms',
     "django_bootstrap5",
     'crispy_bootstrap5',
+    'sweetify',
     
 ]
+
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
